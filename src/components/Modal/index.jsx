@@ -1,20 +1,51 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ExpensesContext } from "../../contexts/expensesContext";
 import { useClickOutside } from "../../hooks/useClickOutside";
 
 export default function Index({ setIsOpen }) {
     const [open, setOpen] = useState(true);
+    const [expenseName, setExpenseName] = useState("");
+    const [expenseValue, setExpenseValue] = useState("");
+
+    const { addExpense } = useContext(ExpensesContext);
 
     let domNode = useClickOutside(() => {
         setOpen(false);
         setIsOpen(false);
     });
 
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        if (expenseName.trim() === "") return;
+
+        const expense = {
+            expenseName,
+            expenseValue: parseFloat(expenseValue),
+        };
+
+        addExpense(expense);
+
+        setOpen(false);
+        setIsOpen(false);
+    }
+
     return (
         <div className={open ? "modal open" : "modal"} ref={domNode}>
             <h3>Nova Despesa</h3>
-            <form>
-                <input type="text" placeholder="Expense Name" />
-                <input type="number" placeholder="Amount" />
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="Expense Name"
+                    value={expenseName}
+                    onChange={(e) => setExpenseName(e.target.value)}
+                />
+                <input
+                    type="number"
+                    placeholder="Amount"
+                    value={expenseValue}
+                    onChange={(e) => setExpenseValue(e.target.value)}
+                />
                 <button type="submit">Add</button>
             </form>
         </div>
