@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { ExpensesContext } from "../../contexts/expensesContext";
+import React from "react";
+import { useExpenses } from "../../hooks/useExpenses";
 
 export default function Index() {
-    const { bills, balance } = useContext(ExpensesContext);
+    const { bills, balance } = useExpenses();
 
     return (
         <div className="cards">

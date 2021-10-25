@@ -29,6 +29,11 @@
       "expenseName": "assd",
       "expenseValue": 0.5,
       "id": 6
+    },
+    {
+      "expenseName": "sadasd",
+      "expenseValue": 11,
+      "id": 7
     }
   ]
 }

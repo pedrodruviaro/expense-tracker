@@ -1,13 +1,13 @@
-import React, { useContext, useState } from "react";
-import { ExpensesContext } from "../../contexts/expensesContext";
+import React, { useState } from "react";
 import { useClickOutside } from "../../hooks/useClickOutside";
+import { useExpenses } from "../../hooks/useExpenses";
 
 export default function Index({ setIsOpen }) {
     const [open, setOpen] = useState(true);
     const [expenseName, setExpenseName] = useState("");
     const [expenseValue, setExpenseValue] = useState("");
 
-    const { addExpense } = useContext(ExpensesContext);
+    const { addExpense } = useExpenses();
 
     let domNode = useClickOutside(() => {
         setOpen(false);
